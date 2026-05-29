@@ -1,15 +1,15 @@
 /*
  * Digidices System - Tamer Sheet
  * Custom sheet for Tamer actors in the Digidices RPG system
+ * This sheet is independent from the CSB template system
  */
-
-import { CustomActorSheetV2 } from './CustomActorSheetV2.js';
 
 /**
  * The Tamer actor sheet for Digidices
- * @extends {CustomActorSheetV2}
+ * @extends {ActorSheetV2}
  */
-export class TamerSheetV2 extends CustomActorSheetV2 {
+//@ts-expect-error Types too deep
+export class TamerSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
     static DEFAULT_OPTIONS = {
         classes: ['custom-system', 'sheet', 'actor', 'actor-v2', 'digidices-tamer'],
         position: {
@@ -30,18 +30,20 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
             rolarRecurso: TamerSheetV2.onRolarRecurso,
             editarFormula: TamerSheetV2.onEditarFormula,
             adicionarItem: TamerSheetV2.onAdicionarItem,
-            removerItem: TamerSheetV2.onRemoverItem
+            removerItem: TamerSheetV2.onRemoverItem,
+            switchTab: TamerSheetV2.onSwitchTab
         }
     };
 
     static PARTS = {
         form: {
-            get template() {
-                return `systems/${game.system.id}/templates/actor/v2/actor-tamer-sheet.hbs`;
-            },
+            template: `systems/custom-system-builder/templates/actor/v2/actor-tamer-sheet.hbs`,
             classes: ['custom-system-actor-content', 'digidices-tamer']
         }
     };
+
+    // Current active tab
+    _activeTab = 'pessoal';
 
     static async onEditImage(_event, target) {
         const field = target.dataset.field || 'img';
@@ -56,6 +58,12 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
         await fp.render({ force: true });
     }
 
+    static onSwitchTab(_event, target) {
+        const tab = target.dataset.tab;
+        this._activeTab = tab;
+        this.render();
+    }
+
     // Roll Test - Attribute + Skill
     static async onRolarTeste(_event, _target) {
         const actor = this.actor;
@@ -64,11 +72,11 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
 
         // Create dialog for roll selection
         const atributosOptions = Object.entries(atributos)
-            .map(([key, value]) => `<option value="${key}">${this._getAtributoLabel(key)} (${value})</option>`)
+            .map(([key, value]) => `<option value="${key}">${TamerSheetV2._getAtributoLabel(key)} (${value})</option>`)
             .join('');
 
         const periciasOptions = Object.entries(pericias)
-            .map(([key, value]) => `<option value="${key}">${this._getPericiaLabel(key)} (${value})</option>`)
+            .map(([key, value]) => `<option value="${key}">${TamerSheetV2._getPericiaLabel(key)} (${value})</option>`)
             .join('');
 
         const dialogContent = `
@@ -103,9 +111,9 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
 
                         const atributoValor = atributos[atributo];
                         const periciaValor = pericias[pericia];
-                        const total = atributoValor + periciaValor + modificador;
+                        const bonus = atributoValor + periciaValor + modificador;
 
-                        const roll = new Roll(`${total}d6cs>=5`);
+                        const roll = new Roll(`1d20 + ${bonus}`);
                         await roll.evaluate();
 
                         const atributoLabel = TamerSheetV2._getAtributoLabel(atributo);
@@ -133,11 +141,11 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
         const pericias = actor.system.pericias;
 
         const atributosOptions = `<option value="">Nenhum</option>` + Object.entries(atributos)
-            .map(([key, _value]) => `<option value="${key}">${this._getAtributoLabel(key)}</option>`)
+            .map(([key, _value]) => `<option value="${key}">${TamerSheetV2._getAtributoLabel(key)}</option>`)
             .join('');
 
         const periciasOptions = `<option value="">Nenhuma</option>` + Object.entries(pericias)
-            .map(([key, _value]) => `<option value="${key}">${this._getPericiaLabel(key)}</option>`)
+            .map(([key, _value]) => `<option value="${key}">${TamerSheetV2._getPericiaLabel(key)}</option>`)
             .join('');
 
         const dialogContent = `
@@ -175,11 +183,6 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
                     </div>
                 </div>
             </form>
-            <script>
-                document.querySelector('[name="temRolagem"]').addEventListener('change', function() {
-                    document.querySelector('.roll-options').style.display = this.checked ? 'block' : 'none';
-                });
-            </script>
         `;
 
         new Dialog({
@@ -268,7 +271,7 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
         const dialogContent = `
             <form class="digidices-formula-dialog">
                 <div class="form-group">
-                    <label>Formula para ${this._getFieldLabel(field)}:</label>
+                    <label>Formula para ${TamerSheetV2._getFieldLabel(field)}:</label>
                     <input type="text" name="formula" value="${currentFormula}" />
                 </div>
                 <p class="hint">
@@ -278,7 +281,7 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
         `;
 
         new Dialog({
-            title: `Editar Formula - ${this._getFieldLabel(field)}`,
+            title: `Editar Formula - ${TamerSheetV2._getFieldLabel(field)}`,
             content: dialogContent,
             buttons: {
                 save: {
@@ -290,7 +293,7 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
                         await actor.update({ [`system.${field}.formula`]: novaFormula });
                         
                         // Recalculate value
-                        const novoValor = this._calcularFormula(actor, novaFormula);
+                        const novoValor = TamerSheetV2._calcularFormula(actor, novaFormula);
                         await actor.update({ [`system.${field}.maximo`]: novoValor });
                     }
                 },
@@ -438,21 +441,63 @@ export class TamerSheetV2 extends CustomActorSheetV2 {
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
         
-        // Add computed values
-        context.atributosArray = Object.entries(this.actor.system.atributos || {}).map(([key, value]) => ({
-            key,
-            label: TamerSheetV2._getAtributoLabel(key),
-            value
-        }));
+        const system = this.actor.system;
+        
+        // Basic data
+        context.system = system;
+        context.activeTab = this._activeTab;
+        
+        // Computed arrays for easier template iteration
+        context.atributosArray = [
+            { key: 'forca', abbr: 'FOR', label: 'Forca', value: system.atributos?.forca || 1 },
+            { key: 'agilidade', abbr: 'AGI', label: 'Agilidade', value: system.atributos?.agilidade || 1 },
+            { key: 'vigor', abbr: 'VIG', label: 'Vigor', value: system.atributos?.vigor || 1 },
+            { key: 'inteligencia', abbr: 'INT', label: 'Inteligencia', value: system.atributos?.inteligencia || 1 },
+            { key: 'vontade', abbr: 'VON', label: 'Vontade', value: system.atributos?.vontade || 1 },
+            { key: 'carisma', abbr: 'CAR', label: 'Carisma', value: system.atributos?.carisma || 1 }
+        ];
 
-        context.periciasArray = Object.entries(this.actor.system.pericias || {}).map(([key, value]) => ({
-            key,
-            label: TamerSheetV2._getPericiaLabel(key),
-            value
-        }));
+        context.periciasFisicas = [
+            { key: 'atletismo', label: 'Atletismo', value: system.pericias?.atletismo || 0 },
+            { key: 'luta', label: 'Luta', value: system.pericias?.luta || 0 },
+            { key: 'acrobacia', label: 'Acrobacia', value: system.pericias?.acrobacia || 0 },
+            { key: 'furtividade', label: 'Furtividade', value: system.pericias?.furtividade || 0 },
+            { key: 'pontaria', label: 'Pontaria', value: system.pericias?.pontaria || 0 },
+            { key: 'conducao', label: 'Conducao', value: system.pericias?.conducao || 0 },
+            { key: 'reflexos', label: 'Reflexos', value: system.pericias?.reflexos || 0 }
+        ];
 
-        context.recursos = this.actor.system.recursos || [];
-        context.inventario = this.actor.system.inventario || [];
+        context.periciasMentais = [
+            { key: 'percepcao', label: 'Percepcao', value: system.pericias?.percepcao || 0 },
+            { key: 'investigacao', label: 'Investigacao', value: system.pericias?.investigacao || 0 },
+            { key: 'tecnologia', label: 'Tecnologia', value: system.pericias?.tecnologia || 0 },
+            { key: 'medicina', label: 'Medicina', value: system.pericias?.medicina || 0 },
+            { key: 'ciencias', label: 'Ciencias', value: system.pericias?.ciencias || 0 },
+            { key: 'tapiologia', label: 'Tapiologia', value: system.pericias?.tapiologia || 0 },
+            { key: 'sobrevivencia', label: 'Sobrevivencia', value: system.pericias?.sobrevivencia || 0 }
+        ];
+
+        context.periciasSociais = [
+            { key: 'empatia', label: 'Empatia', value: system.pericias?.empatia || 0 },
+            { key: 'enganacao', label: 'Enganacao', value: system.pericias?.enganacao || 0 },
+            { key: 'intimidacao', label: 'Intimidacao', value: system.pericias?.intimidacao || 0 },
+            { key: 'persuasao', label: 'Persuasao', value: system.pericias?.persuasao || 0 },
+            { key: 'performance', label: 'Performance', value: system.pericias?.performance || 0 },
+            { key: 'vontadePericia', label: 'Vontade', value: system.pericias?.vontadePericia || 0 },
+            { key: 'intuicao', label: 'Intuicao', value: system.pericias?.intuicao || 0 }
+        ];
+
+        context.recursos = system.recursos || [];
+        context.inventario = system.inventario || [];
+
+        // Calculate bar percentages
+        const pvMax = system.pv?.maximo || 1;
+        const pvVal = system.pv?.valor || 0;
+        context.pvPercent = Math.min(100, Math.max(0, (pvVal / pvMax) * 100));
+
+        const auraMax = system.digiAura?.maximo || 1;
+        const auraVal = system.digiAura?.valor || 0;
+        context.auraPercent = Math.min(100, Math.max(0, (auraVal / auraMax) * 100));
 
         return context;
     }

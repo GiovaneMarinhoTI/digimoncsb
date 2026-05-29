@@ -137,13 +137,7 @@ const defineTamerActorDataModelSchema = () => ({
         tipo: new StringField({ required: false, initial: '' }),
         cor: new StringField({ required: false, initial: '' }),
         descricao: new StringField({ required: false, initial: '' })
-    }),
-    
-    // Profile image and display
-    display: DisplayModel(),
-    body: BodyModel(),
-    header: HeaderModel(),
-    hidden: HiddenPropsModel()
+    })
 });
 
 export class TamerActorDataModel extends AbstractActorDataModel {
