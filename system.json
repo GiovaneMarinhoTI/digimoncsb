@@ -111,7 +111,8 @@
     "documentTypes": {
         "Actor": {
             "character": {},
-            "_template": {}
+            "_template": {},
+            "tamer": {}
         },
         "Item": {
             "equippableItem": {},

@@ -49,10 +49,11 @@ import CustomActiveEffect from './documents/CustomActiveEffect.js';
 import CustomActiveEffectConfig from './sheets/CustomActiveEffectConfig.js';
 import CustomStatusEffectsApplication from './applications/CustomStatusEffectsApplication.js';
 import ActiveEffectContainerItemSheet from './sheets/items/active-effect-container-item-sheet.js';
-import { CharacterActorDataModel, TemplateActorDataModel } from './documents/model/actorModel.js';
+import { CharacterActorDataModel, TemplateActorDataModel, TamerActorDataModel } from './documents/model/actorModel.js';
 import { BaseItemDataModel, EquippableItemDataModel, TemplateItemDataModel } from './documents/model/itemModel.js';
 import { CharacterSheetV2 } from './sheets/actors/v2/CharacterSheetV2.js';
 import { TemplateSheetV2 } from './sheets/actors/v2/TemplateSheetV2.js';
+import { TamerSheetV2 } from './sheets/actors/v2/TamerSheetV2.js';
 import { EquippableItemTemplateSheetV2 } from './sheets/items/v2/EquippableItemTemplateSheetV2.js';
 import { EquippableItemSheetV2 } from './sheets/items/v2/EquippableItemSheetV2.js';
 import { SubTemplateItemSheetV2 } from './sheets/items/v2/SubTemplateItemSheetV2.js';
@@ -82,6 +83,7 @@ async function initHook() {
         CONFIG.Actor.documentClass = CustomActor;
         CONFIG.Actor.dataModels.character = CharacterActorDataModel;
         CONFIG.Actor.dataModels._template = TemplateActorDataModel;
+        CONFIG.Actor.dataModels.tamer = TamerActorDataModel;
         // @ts-expect-error Don't know, don't care
         CONFIG.Item.documentClass = CustomItem;
         CONFIG.Item.dataModels.equippableItem = EquippableItemDataModel;
@@ -243,6 +245,12 @@ async function initHook() {
             types: ['_template'],
             label: game.i18n.localize('CSB.Settings.SheetName')
         });
+        // Digidices - Register Tamer Sheet
+        foundry.documents.collections.Actors.registerSheet(game.system.id, TamerSheetV2, {
+            makeDefault: true,
+            types: ['tamer'],
+            label: 'Digidices Tamer'
+        });
         //@ts-expect-error wrong types
         foundry.documents.collections.Actors.registerSheet(game.system.id, CharacterSheet, {
             makeDefault: game.settings.get(game.system.id, 'useApplicationV1'),
@@ -320,6 +328,26 @@ async function initHook() {
         });
         // Helper-functions for handlebars
         Handlebars.registerHelper('eq', (a, b) => a == b);
+        Handlebars.registerHelper('gt', (a, b) => a > b);
+        Handlebars.registerHelper('lt', (a, b) => a < b);
+        Handlebars.registerHelper('math', function(...args) {
+            // Remove the Handlebars options object from the end
+            args.pop();
+            if (args.length < 3) return args[0];
+            
+            let result = parseFloat(args[0]) || 0;
+            for (let i = 1; i < args.length; i += 2) {
+                const operator = args[i];
+                const operand = parseFloat(args[i + 1]) || 0;
+                switch (operator) {
+                    case '+': result += operand; break;
+                    case '-': result -= operand; break;
+                    case '*': result *= operand; break;
+                    case '/': result = operand !== 0 ? result / operand : 0; break;
+                }
+            }
+            return result;
+        });
         // Partials
         void foundry.applications.handlebars
             .getTemplate(`systems/${game.system.id}/templates/_template/partials/icon-formula.hbs`)

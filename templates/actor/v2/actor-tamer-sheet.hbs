@@ -1,0 +1,412 @@
+{{!-- 
+    Digidices System - Tamer Character Sheet
+    Template for Tamer actors in Foundry VTT
+--}}
+<div class="digidices-tamer custom-system-entity">
+    {{!-- Sheet Header --}}
+    <header class="tamer-header">
+        <div class="tamer-portrait">
+            <img class="profile-img" src="{{document.img}}" data-action="editImage" data-edit="img" title="{{document.name}}" />
+        </div>
+        
+        <div class="tamer-info">
+            <div class="tamer-name-row">
+                <input type="text" name="name" value="{{document.name}}" placeholder="Nome do Tamer" class="tamer-name-input" />
+            </div>
+            
+            <div class="tamer-stats-row">
+                <div class="stat-box">
+                    <label>Nivel</label>
+                    <input type="number" name="system.nivel" value="{{document.system.nivel}}" min="1" />
+                </div>
+                <div class="stat-box">
+                    <label>Idade</label>
+                    <input type="number" name="system.idade" value="{{document.system.idade}}" min="0" />
+                </div>
+                <div class="stat-box">
+                    <label>Popularidade</label>
+                    <input type="number" name="system.popularidade" value="{{document.system.popularidade}}" />
+                </div>
+                <div class="stat-box">
+                    <label>Estudo</label>
+                    <input type="number" name="system.estudo" value="{{document.system.estudo}}" />
+                </div>
+            </div>
+            
+            <div class="tamer-brasao-row">
+                <label>Brasao</label>
+                <input type="text" name="system.brasao" value="{{document.system.brasao}}" placeholder="Brasao do Tamer" />
+            </div>
+        </div>
+    </header>
+
+    {{!-- Tab Navigation --}}
+    <nav class="tamer-tabs" data-group="primary">
+        <a class="tab-item active" data-tab="pessoal" data-group="primary">
+            <i class="fas fa-user"></i> Pessoal
+        </a>
+        <a class="tab-item" data-tab="atributos" data-group="primary">
+            <i class="fas fa-fist-raised"></i> Atributos
+        </a>
+        <a class="tab-item" data-tab="recursos" data-group="primary">
+            <i class="fas fa-star"></i> Recursos
+        </a>
+        <a class="tab-item" data-tab="inventario" data-group="primary">
+            <i class="fas fa-briefcase"></i> Inventario
+        </a>
+    </nav>
+
+    {{!-- Tab Content --}}
+    <div class="tamer-content">
+        {{!-- Tab: Pessoal --}}
+        <section class="tab-content active" data-tab="pessoal" data-group="primary">
+            <div class="personal-section">
+                <h3 class="section-title">
+                    <i class="fas fa-id-card"></i> Informacoes Pessoais
+                </h3>
+                
+                <div class="personal-grid">
+                    <div class="personal-field full-width">
+                        <label>Nome Completo</label>
+                        <input type="text" name="system.nome" value="{{document.system.nome}}" placeholder="Nome completo do personagem" />
+                    </div>
+                </div>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-mobile-alt"></i> Digivice
+                </h3>
+                
+                <div class="digivice-section">
+                    <div class="digivice-field">
+                        <label>Tipo</label>
+                        <input type="text" name="system.digivice.tipo" value="{{document.system.digivice.tipo}}" placeholder="Ex: D-3, D-Arc, etc." />
+                    </div>
+                    <div class="digivice-field">
+                        <label>Cor</label>
+                        <input type="text" name="system.digivice.cor" value="{{document.system.digivice.cor}}" placeholder="Cor do Digivice" />
+                    </div>
+                    <div class="digivice-field full-width">
+                        <label>Descricao</label>
+                        <textarea name="system.digivice.descricao" placeholder="Descricao especial do Digivice">{{document.system.digivice.descricao}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Tab: Atributos e Pericias --}}
+        <section class="tab-content" data-tab="atributos" data-group="primary">
+            {{!-- Roll Test Button --}}
+            <div class="roll-test-section">
+                <button type="button" class="roll-test-btn" data-action="rolarTeste">
+                    <i class="fas fa-dice"></i> Rolar Teste
+                </button>
+            </div>
+
+            {{!-- Combat Stats --}}
+            <div class="combat-stats">
+                <div class="combat-stat pv-stat">
+                    <div class="stat-header">
+                        <span class="stat-label">PV</span>
+                        <button type="button" class="config-btn" data-action="editarFormula" data-field="pv" title="Editar Formula">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="bar-fill pv-fill" style="width: {{#if document.system.pv.maximo}}{{math document.system.pv.valor "/" document.system.pv.maximo "*" 100}}{{else}}100{{/if}}%"></div>
+                    </div>
+                    <div class="stat-values">
+                        <input type="number" name="system.pv.valor" value="{{document.system.pv.valor}}" min="0" />
+                        <span>/</span>
+                        <input type="number" name="system.pv.maximo" value="{{document.system.pv.maximo}}" min="1" />
+                    </div>
+                </div>
+
+                <div class="combat-stat aura-stat">
+                    <div class="stat-header">
+                        <span class="stat-label">Digi-Aura</span>
+                        <button type="button" class="config-btn" data-action="editarFormula" data-field="digiAura" title="Editar Formula">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="bar-fill aura-fill" style="width: {{#if document.system.digiAura.maximo}}{{math document.system.digiAura.valor "/" document.system.digiAura.maximo "*" 100}}{{else}}100{{/if}}%"></div>
+                    </div>
+                    <div class="stat-values">
+                        <input type="number" name="system.digiAura.valor" value="{{document.system.digiAura.valor}}" min="0" />
+                        <span>/</span>
+                        <input type="number" name="system.digiAura.maximo" value="{{document.system.digiAura.maximo}}" min="1" />
+                    </div>
+                </div>
+
+                <div class="combat-stat defesa-stat">
+                    <div class="stat-header">
+                        <span class="stat-label">Defesa</span>
+                        <button type="button" class="config-btn" data-action="editarFormula" data-field="defesa" title="Editar Formula">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="stat-value-single">
+                        <input type="number" name="system.defesa.valor" value="{{document.system.defesa.valor}}" />
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Attributes --}}
+            <h3 class="section-title">
+                <i class="fas fa-chart-bar"></i> Atributos
+            </h3>
+            
+            <div class="attributes-grid">
+                <div class="attribute-card">
+                    <div class="attribute-abbr">FOR</div>
+                    <div class="attribute-name">Forca</div>
+                    <input type="number" name="system.atributos.forca" value="{{document.system.atributos.forca}}" min="1" />
+                </div>
+                <div class="attribute-card">
+                    <div class="attribute-abbr">AGI</div>
+                    <div class="attribute-name">Agilidade</div>
+                    <input type="number" name="system.atributos.agilidade" value="{{document.system.atributos.agilidade}}" min="1" />
+                </div>
+                <div class="attribute-card">
+                    <div class="attribute-abbr">VIG</div>
+                    <div class="attribute-name">Vigor</div>
+                    <input type="number" name="system.atributos.vigor" value="{{document.system.atributos.vigor}}" min="1" />
+                </div>
+                <div class="attribute-card">
+                    <div class="attribute-abbr">INT</div>
+                    <div class="attribute-name">Inteligencia</div>
+                    <input type="number" name="system.atributos.inteligencia" value="{{document.system.atributos.inteligencia}}" min="1" />
+                </div>
+                <div class="attribute-card">
+                    <div class="attribute-abbr">VON</div>
+                    <div class="attribute-name">Vontade</div>
+                    <input type="number" name="system.atributos.vontade" value="{{document.system.atributos.vontade}}" min="1" />
+                </div>
+                <div class="attribute-card">
+                    <div class="attribute-abbr">CAR</div>
+                    <div class="attribute-name">Carisma</div>
+                    <input type="number" name="system.atributos.carisma" value="{{document.system.atributos.carisma}}" min="1" />
+                </div>
+            </div>
+
+            {{!-- Skills --}}
+            <h3 class="section-title">
+                <i class="fas fa-running"></i> Pericias
+            </h3>
+            
+            <div class="skills-container">
+                {{!-- Physical Skills --}}
+                <div class="skill-category">
+                    <h4 class="category-title">Fisicas</h4>
+                    <div class="skills-list">
+                        <div class="skill-row">
+                            <span class="skill-name">Atletismo</span>
+                            <input type="number" name="system.pericias.atletismo" value="{{document.system.pericias.atletismo}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Luta</span>
+                            <input type="number" name="system.pericias.luta" value="{{document.system.pericias.luta}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Acrobacia</span>
+                            <input type="number" name="system.pericias.acrobacia" value="{{document.system.pericias.acrobacia}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Furtividade</span>
+                            <input type="number" name="system.pericias.furtividade" value="{{document.system.pericias.furtividade}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Pontaria</span>
+                            <input type="number" name="system.pericias.pontaria" value="{{document.system.pericias.pontaria}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Conducao</span>
+                            <input type="number" name="system.pericias.conducao" value="{{document.system.pericias.conducao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Reflexos</span>
+                            <input type="number" name="system.pericias.reflexos" value="{{document.system.pericias.reflexos}}" min="0" />
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- Mental Skills --}}
+                <div class="skill-category">
+                    <h4 class="category-title">Mentais</h4>
+                    <div class="skills-list">
+                        <div class="skill-row">
+                            <span class="skill-name">Percepcao</span>
+                            <input type="number" name="system.pericias.percepcao" value="{{document.system.pericias.percepcao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Investigacao</span>
+                            <input type="number" name="system.pericias.investigacao" value="{{document.system.pericias.investigacao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Tecnologia</span>
+                            <input type="number" name="system.pericias.tecnologia" value="{{document.system.pericias.tecnologia}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Medicina</span>
+                            <input type="number" name="system.pericias.medicina" value="{{document.system.pericias.medicina}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Ciencias</span>
+                            <input type="number" name="system.pericias.ciencias" value="{{document.system.pericias.ciencias}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Tapiologia</span>
+                            <input type="number" name="system.pericias.tapiologia" value="{{document.system.pericias.tapiologia}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Sobrevivencia</span>
+                            <input type="number" name="system.pericias.sobrevivencia" value="{{document.system.pericias.sobrevivencia}}" min="0" />
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- Social Skills --}}
+                <div class="skill-category">
+                    <h4 class="category-title">Sociais</h4>
+                    <div class="skills-list">
+                        <div class="skill-row">
+                            <span class="skill-name">Empatia</span>
+                            <input type="number" name="system.pericias.empatia" value="{{document.system.pericias.empatia}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Enganacao</span>
+                            <input type="number" name="system.pericias.enganacao" value="{{document.system.pericias.enganacao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Intimidacao</span>
+                            <input type="number" name="system.pericias.intimidacao" value="{{document.system.pericias.intimidacao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Persuasao</span>
+                            <input type="number" name="system.pericias.persuasao" value="{{document.system.pericias.persuasao}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Performance</span>
+                            <input type="number" name="system.pericias.performance" value="{{document.system.pericias.performance}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Vontade</span>
+                            <input type="number" name="system.pericias.vontadePericia" value="{{document.system.pericias.vontadePericia}}" min="0" />
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Intuicao</span>
+                            <input type="number" name="system.pericias.intuicao" value="{{document.system.pericias.intuicao}}" min="0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Tab: Recursos --}}
+        <section class="tab-content" data-tab="recursos" data-group="primary">
+            <div class="resources-header">
+                <h3 class="section-title">
+                    <i class="fas fa-star"></i> Recursos
+                </h3>
+                <button type="button" class="add-resource-btn" data-action="adicionarRecurso">
+                    <i class="fas fa-plus"></i> Adicionar Recurso
+                </button>
+            </div>
+
+            <div class="resources-list">
+                {{#each document.system.recursos}}
+                <div class="resource-card" data-resource-id="{{this.id}}">
+                    <div class="resource-header">
+                        <span class="resource-name">{{this.nome}}</span>
+                        <div class="resource-actions">
+                            {{#if this.temRolagem}}
+                            <button type="button" class="resource-roll-btn" data-action="rolarRecurso" data-resource-id="{{this.id}}" title="Rolar">
+                                <i class="fas fa-dice"></i>
+                            </button>
+                            {{/if}}
+                            <button type="button" class="resource-delete-btn" data-action="removerRecurso" data-resource-id="{{this.id}}" title="Remover">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {{#if this.descricao}}
+                    <div class="resource-description">{{this.descricao}}</div>
+                    {{/if}}
+                    {{#if this.temRolagem}}
+                    <div class="resource-roll-info">
+                        <span class="roll-formula">{{this.dadosRolagem}}</span>
+                        {{#if this.atributoRolagem}}<span class="roll-attr">+ {{this.atributoRolagem}}</span>{{/if}}
+                        {{#if this.periciaRolagem}}<span class="roll-skill">+ {{this.periciaRolagem}}</span>{{/if}}
+                        {{#if this.modificador}}<span class="roll-mod">{{#if (gt this.modificador 0)}}+{{/if}}{{this.modificador}}</span>{{/if}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{else}}
+                <div class="empty-message">
+                    <i class="fas fa-inbox"></i>
+                    <p>Nenhum recurso adicionado.</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        {{!-- Tab: Inventario --}}
+        <section class="tab-content" data-tab="inventario" data-group="primary">
+            <div class="inventory-header">
+                <h3 class="section-title">
+                    <i class="fas fa-briefcase"></i> Inventario
+                </h3>
+                <button type="button" class="add-item-btn" data-action="adicionarItem">
+                    <i class="fas fa-plus"></i> Adicionar Item
+                </button>
+            </div>
+
+            <div class="inventory-list">
+                {{#each document.system.inventario}}
+                <div class="inventory-item" data-item-id="{{this.id}}">
+                    <div class="item-info">
+                        <span class="item-name">{{this.nome}}</span>
+                        {{#if this.descricao}}
+                        <span class="item-description">{{this.descricao}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="item-quantity">
+                        <input type="number" value="{{this.quantidade}}" min="0" data-item-id="{{this.id}}" />
+                    </div>
+                    <button type="button" class="item-delete-btn" data-action="removerItem" data-item-id="{{this.id}}" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                {{else}}
+                <div class="empty-message">
+                    <i class="fas fa-box-open"></i>
+                    <p>Inventario vazio.</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+// Tab switching functionality
+document.addEventListener('click', function(e) {
+    const tabItem = e.target.closest('.tab-item');
+    if (tabItem) {
+        const group = tabItem.dataset.group;
+        const targetTab = tabItem.dataset.tab;
+        
+        // Update active tab button
+        document.querySelectorAll(`.tab-item[data-group="${group}"]`).forEach(tab => {
+            tab.classList.remove('active');
+        });
+        tabItem.classList.add('active');
+        
+        // Update active tab content
+        document.querySelectorAll(`.tab-content[data-group="${group}"]`).forEach(content => {
+            content.classList.remove('active');
+        });
+        document.querySelector(`.tab-content[data-tab="${targetTab}"][data-group="${group}"]`)?.classList.add('active');
+    }
+});
+</script>

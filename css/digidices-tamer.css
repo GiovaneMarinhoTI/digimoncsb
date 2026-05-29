@@ -900,3 +900,669 @@
     color: white;
     box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
 }
+
+/* ========================================
+   ESTILOS ESPECIFICOS DO TEMPLATE TAMER
+   ======================================== */
+
+/* Header do Tamer */
+.digidices-tamer .tamer-header {
+    background: linear-gradient(180deg, var(--digi-bg-light) 0%, transparent 100%);
+    border-bottom: 2px solid var(--digi-border);
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.digidices-tamer .tamer-portrait {
+    width: 120px;
+    height: 120px;
+    border: 3px solid var(--digi-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: var(--digi-glow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .tamer-portrait:hover {
+    border-color: var(--digi-secondary);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: scale(1.02);
+}
+
+.digidices-tamer .tamer-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.digidices-tamer .tamer-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.digidices-tamer .tamer-name-row input {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--digi-border);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.digidices-tamer .tamer-name-row input:focus {
+    border-color: var(--digi-primary);
+    outline: none;
+}
+
+.digidices-tamer .tamer-stats-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.digidices-tamer .tamer-stats-row .stat-box {
+    flex: 1;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--digi-border);
+    border-radius: 6px;
+}
+
+.digidices-tamer .tamer-stats-row .stat-box label {
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.digidices-tamer .tamer-stats-row .stat-box input {
+    width: 50px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--digi-primary);
+}
+
+.digidices-tamer .tamer-brasao-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.digidices-tamer .tamer-brasao-row input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--digi-border);
+    color: var(--digi-secondary);
+    font-weight: 600;
+}
+
+/* Tab Navigation */
+.digidices-tamer .tamer-tabs {
+    display: flex;
+    gap: 5px;
+    padding: 10px 15px;
+    background: var(--digi-bg-light);
+    border-bottom: 1px solid var(--digi-border);
+    flex-wrap: wrap;
+}
+
+.digidices-tamer .tab-item {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.digidices-tamer .tab-item:hover {
+    color: var(--digi-primary);
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--digi-border);
+}
+
+.digidices-tamer .tab-item.active {
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border-color: var(--digi-primary);
+}
+
+/* Tab Content */
+.digidices-tamer .tamer-content {
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.digidices-tamer .tab-content {
+    display: none;
+}
+
+.digidices-tamer .tab-content.active {
+    display: block;
+}
+
+/* Section Titles */
+.digidices-tamer .section-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 20px 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--digi-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.digidices-tamer .section-title i {
+    color: var(--digi-secondary);
+}
+
+/* Personal Section */
+.digidices-tamer .personal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.digidices-tamer .personal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.digidices-tamer .personal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.digidices-tamer .personal-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.digidices-tamer .personal-field input,
+.digidices-tamer .personal-field textarea {
+    width: 100%;
+}
+
+/* Digivice Section */
+.digidices-tamer .digivice-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.digidices-tamer .digivice-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.digidices-tamer .digivice-field.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Roll Test Button */
+.digidices-tamer .roll-test-section {
+    margin-bottom: 20px;
+}
+
+.digidices-tamer .roll-test-btn {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.digidices-tamer .roll-test-btn:hover {
+    background: linear-gradient(135deg, var(--digi-secondary) 0%, #cc5529 100%);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Combat Stats */
+.digidices-tamer .combat-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.digidices-tamer .combat-stat {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.digidices-tamer .stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .stat-label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    text-transform: uppercase;
+}
+
+.digidices-tamer .config-btn {
+    background: transparent;
+    border: 1px solid var(--digi-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--digi-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .config-btn:hover {
+    color: var(--digi-primary);
+    border-color: var(--digi-primary);
+}
+
+.digidices-tamer .stat-bar {
+    height: 20px;
+    background: var(--digi-bg-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.digidices-tamer .bar-fill.pv-fill {
+    background: linear-gradient(90deg, var(--digi-danger) 0%, #ff6688 100%);
+}
+
+.digidices-tamer .bar-fill.aura-fill {
+    background: linear-gradient(90deg, var(--digi-accent) 0%, #9d4edd 100%);
+}
+
+.digidices-tamer .stat-values {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--digi-text-primary);
+}
+
+.digidices-tamer .stat-values input {
+    width: 45px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--digi-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+}
+
+.digidices-tamer .stat-value-single input {
+    width: 60px;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+/* Attributes Grid */
+.digidices-tamer .attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.digidices-tamer .attribute-card {
+    background: linear-gradient(135deg, var(--digi-bg-light) 0%, var(--digi-bg-dark) 100%);
+    border: 2px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .attribute-card:hover {
+    border-color: var(--digi-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--digi-shadow);
+}
+
+.digidices-tamer .attribute-abbr {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--digi-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.digidices-tamer .attribute-name {
+    font-size: 10px;
+    color: var(--digi-text-muted);
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .attribute-card input {
+    width: 50px;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+/* Skills Container */
+.digidices-tamer .skills-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.digidices-tamer .skill-category {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.digidices-tamer .category-title {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--digi-border);
+}
+
+.digidices-tamer .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.digidices-tamer .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .skill-row:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.digidices-tamer .skill-name {
+    font-size: 12px;
+    color: var(--digi-text-primary);
+}
+
+.digidices-tamer .skill-row input {
+    width: 35px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--digi-primary);
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+/* Resources */
+.digidices-tamer .resources-header,
+.digidices-tamer .inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.digidices-tamer .add-resource-btn,
+.digidices-tamer .add-item-btn {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .add-resource-btn:hover,
+.digidices-tamer .add-item-btn:hover {
+    background: linear-gradient(135deg, var(--digi-secondary) 0%, #cc5529 100%);
+}
+
+.digidices-tamer .resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.digidices-tamer .resource-card {
+    background: linear-gradient(135deg, var(--digi-bg-light) 0%, var(--digi-bg-medium) 100%);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.digidices-tamer .resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .resource-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--digi-primary);
+}
+
+.digidices-tamer .resource-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.digidices-tamer .resource-roll-btn,
+.digidices-tamer .resource-delete-btn {
+    background: transparent;
+    border: 1px solid var(--digi-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--digi-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .resource-roll-btn:hover {
+    color: var(--digi-primary);
+    border-color: var(--digi-primary);
+}
+
+.digidices-tamer .resource-delete-btn:hover {
+    color: var(--digi-danger);
+    border-color: var(--digi-danger);
+}
+
+.digidices-tamer .resource-description {
+    font-size: 12px;
+    color: var(--digi-text-secondary);
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .resource-roll-info {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--digi-text-muted);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.digidices-tamer .roll-formula {
+    color: var(--digi-primary);
+}
+
+.digidices-tamer .roll-attr,
+.digidices-tamer .roll-skill {
+    color: var(--digi-secondary);
+}
+
+/* Inventory */
+.digidices-tamer .inventory-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.digidices-tamer .inventory-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--digi-border);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .inventory-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.digidices-tamer .item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.digidices-tamer .item-name {
+    font-weight: 600;
+    color: var(--digi-text-primary);
+}
+
+.digidices-tamer .item-description {
+    font-size: 11px;
+    color: var(--digi-text-muted);
+}
+
+.digidices-tamer .item-quantity input {
+    width: 40px;
+    text-align: center;
+    font-family: var(--font-mono);
+    background: var(--digi-bg-dark);
+}
+
+.digidices-tamer .item-delete-btn {
+    background: transparent;
+    border: 1px solid var(--digi-border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    color: var(--digi-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .item-delete-btn:hover {
+    color: var(--digi-danger);
+    border-color: var(--digi-danger);
+}
+
+/* Empty Message */
+.digidices-tamer .empty-message {
+    text-align: center;
+    padding: 30px;
+    color: var(--digi-text-muted);
+}
+
+.digidices-tamer .empty-message i {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: var(--digi-border);
+}
+
+.digidices-tamer .empty-message p {
+    margin: 0;
+}
