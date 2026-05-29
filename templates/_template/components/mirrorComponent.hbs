@@ -1,0 +1,17 @@
+{{! Author: Jean-Baptiste Louvet-Daniel
+   -
+   - This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. }}
+
+<fieldset class="custom-system-fieldset">
+    <legend>{{localize "CSB.ComponentProperties.ComponentType.MirrorComponent"}}</legend>
+
+    <div class='custom-system-form-field'>
+        <label for='mirrorComponentTargetKey-{{appId}}'>
+            {{localize 'CSB.ComponentProperties.MirrorComponent.TargetKey'}}
+            {{> icon-info title=(localize 'CSB.ComponentProperties.MirrorComponent.TargetKeyDescription')}}
+        </label>
+        <input id='mirrorComponentTargetKey-{{appId}}' type='text' data-key='targetKey' name='targetKey' value='{{targetKey}}' />
+    </div>
+</fieldset>

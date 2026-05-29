@@ -1,0 +1,12 @@
+<div class="form-group">
+    <label>{{localize 'Name'}}</label>
+    <input name="itemName" type="text" placeholder="{{defaultItemName}}" autofocus>
+</div>
+{{#if displayTemplates}}
+    <div class="form-group">
+        <label>{{localize 'CSB.Sheets.Template'}}</label>
+        <select name="itemTempalte">
+            {{selectOptions ITEMTEMPLATES selected=defaultTemplate}}
+        </select>
+    </div>
+{{/if}}
