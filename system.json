@@ -77,6 +77,11 @@
             "lang": "ru",
             "name": "Русский",
             "path": "lang/ru.json"
+        },
+        {
+            "lang": "pt-br",
+            "name": "Portugues (Brasil)",
+            "path": "lang/pt-br.json"
         }
     ],
     "esmodules": [
@@ -100,7 +105,8 @@
         "css/custom-status-effects.css",
         "css/custom-dialog.css",
         "css/display-settings.css",
-        "css/active-effect-config.css"
+        "css/active-effect-config.css",
+        "css/digidices-tamer.css"
     ],
     "documentTypes": {
         "Actor": {

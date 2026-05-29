@@ -1,0 +1,201 @@
+{
+    "CSB": {
+        "ActiveEffects": {
+            "AddToPredefinedButton": {
+                "Text": "Adicionar aos Efeitos Ativos predefinidos"
+            },
+            "ConfigureCounter": "Abrir Configuracao do Contador",
+            "EffectPriorityLabel": "Prioridade do Efeito",
+            "RemoveFromPredefinedButton": {
+                "Text": "Remover dos Efeitos Ativos predefinidos"
+            },
+            "UpdatePredefinedButton": {
+                "Text": "Atualizar Efeito Ativo predefinido"
+            }
+        },
+        "Attributes": {
+            "AttributeBarsDialog": {
+                "Title": "Barras de atributos do Ator"
+            },
+            "EditAttributeBarsDialog": {
+                "MissingData": "Nome, Valor e Maximo devem ser inseridos para cada barra de atributo",
+                "Title": "Configurar barras de atributos"
+            },
+            "EditHiddenAttributesDialog": {
+                "MissingData": "Nome e Formula devem ser inseridos para cada atributo",
+                "Title": "Configurar atributos ocultos"
+            },
+            "Formula": "Formula",
+            "HiddenAttributesDialog": {
+                "Title": "Atributos ocultos"
+            },
+            "Maximum": "Maximo",
+            "Name": "Nome",
+            "Value": "Valor"
+        },
+        "Sheets": {
+            "Template": "Template",
+            "ReloadTemplate": "Recarregar Template",
+            "OpenTemplateSheet": "Abrir Ficha do Template",
+            "SeeHiddenAttributes": "Ver Atributos Ocultos",
+            "SeeAttributeBars": "Ver Barras de Atributos"
+        }
+    },
+    "DIGIDICES": {
+        "Tamer": {
+            "Title": "Ficha de Domador",
+            "Tabs": {
+                "Personal": "Informacoes Pessoais",
+                "AttributesSkills": "Atributos e Pericias",
+                "Resources": "Recursos",
+                "Inventory": "Inventario"
+            },
+            "Personal": {
+                "Name": "Nome",
+                "Age": "Idade",
+                "Archetype": "Arquetipo",
+                "Level": "Nivel",
+                "Crest": "Brasao",
+                "CrestUnknown": "???",
+                "Photo": "Foto",
+                "Popularity": "Popularidade",
+                "Study": "Estudo"
+            },
+            "Attributes": {
+                "Title": "Atributos",
+                "Subtitle": "Maximo Inicial: 3 | Pontos: 12",
+                "STR": "Forca",
+                "STR_Short": "FOR",
+                "STR_Desc": "Poder fisico, capacidade de carga e impacto",
+                "AGI": "Agilidade",
+                "AGI_Short": "AGI",
+                "AGI_Desc": "Reflexos, velocidade e coordenacao",
+                "VIG": "Vigor",
+                "VIG_Short": "VIG",
+                "VIG_Desc": "Resistencia fisica, saude e folego",
+                "INT": "Inteligencia",
+                "INT_Short": "INT",
+                "INT_Desc": "Raciocinio, memoria e aprendizado (+1 Ponto de Pericia por nivel de INT)",
+                "WIL": "Vontade",
+                "WIL_Short": "VON",
+                "WIL_Desc": "Resiliencia mental, coragem e foco",
+                "CHA": "Carisma",
+                "CHA_Short": "CAR",
+                "CHA_Desc": "Presenca, lideranca e charme"
+            },
+            "Skills": {
+                "Title": "Pericias",
+                "Subtitle": "Pontos Iniciais: 8 + Inteligencia",
+                "RollInfo": "Para testes, role: 1d20 + Atributo Base + Nivel da Pericia",
+                "MaxInitial": "Maximo de 4 pontos no inicio",
+                "Categories": {
+                    "Physical": "Fisicas",
+                    "Mental": "Mentais / Tecnicas",
+                    "Social": "Sociais",
+                    "Knowledge": "Conhecimentos"
+                },
+                "Physical": {
+                    "Acrobatics": "Acrobacia",
+                    "Athletics": "Atletismo",
+                    "Stealth": "Furtividade",
+                    "Fighting": "Luta"
+                },
+                "Mental": {
+                    "Technology": "Tecnologia",
+                    "Investigation": "Investigacao",
+                    "Medicine": "Medicina / Socorros",
+                    "Perception": "Percepcao"
+                },
+                "Social": {
+                    "Intuition": "Intuicao",
+                    "Deception": "Enganacao",
+                    "Intimidation": "Intimidacao",
+                    "Persuasion": "Persuasao"
+                },
+                "Knowledge": {
+                    "General": "Conhecimento Geral [Academico]",
+                    "Survival": "Sobrevivencia"
+                }
+            },
+            "DerivedStats": {
+                "Title": "Atributos Derivados e Combate",
+                "HP": "Pontos de Vida (PV)",
+                "HP_Calc": "Calculo Base: 10 + Vigor + Bonus de Arquetipo",
+                "DigiAura": "Digi-Aura",
+                "DigiAura_Desc": "Definido pelo seu arquetipo",
+                "DamageReduction": "Reducao de Dano",
+                "DamageReduction_Calc": "Calculo: 10 + Agilidade",
+                "Movement": "Movimento",
+                "Movement_Calc": "Calculo: 30ft Base + (Agilidade x 5ft)",
+                "Movement_Grid": "Cada 5ft = 1 Quadrado"
+            },
+            "Resources": {
+                "Title": "Recursos",
+                "AddResource": "Adicionar Recurso",
+                "ResourceName": "Nome do Recurso",
+                "Description": "Descricao",
+                "HasRoll": "Possui Rolagem?",
+                "RollConfig": "Configuracao de Rolagem",
+                "SelectDice": "Selecionar Dado",
+                "SelectAttribute": "Selecionar Atributo",
+                "Roll": "Rolar",
+                "Edit": "Editar",
+                "Delete": "Deletar",
+                "NoResources": "Nenhum recurso adicionado"
+            },
+            "Inventory": {
+                "Title": "Inventario",
+                "Digivice": "Digivice",
+                "DigiviceModel": "Modelo/Cor",
+                "Money": "Dinheiro / Bits",
+                "Items": "Itens",
+                "AddItem": "Adicionar Item",
+                "ItemName": "Nome do Item",
+                "Quantity": "Qtd",
+                "Weight": "Peso",
+                "Notes": "Notas",
+                "NoItems": "Nenhum item no inventario"
+            },
+            "Archetype": {
+                "Title": "Arquetipo",
+                "Description": "Seu estilo de jogo define suas habilidades especiais de humano para ajudar seu Digimon",
+                "AbilityLevel": "Habilidade Nivel",
+                "AbilityDescription": "Descricao da habilidade aqui"
+            }
+        },
+        "Dice": {
+            "d4": "d4",
+            "d6": "d6",
+            "d8": "d8",
+            "d10": "d10",
+            "d12": "d12",
+            "d20": "d20"
+        },
+        "Common": {
+            "Roll": "Rolar",
+            "Save": "Salvar",
+            "Cancel": "Cancelar",
+            "Edit": "Editar",
+            "Delete": "Deletar",
+            "Add": "Adicionar",
+            "Current": "Atual",
+            "Maximum": "Maximo",
+            "None": "Nenhum"
+        }
+    },
+    "TYPES": {
+        "Actor": {
+            "_template": "Template",
+            "character": "Personagem",
+            "tamer": "Domador",
+            "digimon": "Digimon"
+        },
+        "Item": {
+            "_equippableItemTemplate": "Template de Item Equipavel",
+            "activeEffectContainer": "Efeitos Ativos Predefinidos",
+            "equippableItem": "Item Equipavel",
+            "subTemplate": "Subtemplate",
+            "userInputTemplate": "Template de Entrada do Usuario"
+        }
+    }
+}

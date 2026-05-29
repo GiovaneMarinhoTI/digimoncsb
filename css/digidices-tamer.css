@@ -1,0 +1,902 @@
+/*
+ * Digidices - Ficha de Tamer (Domador)
+ * Estilo Techno/Digimon
+ * Sistema Custom System Builder para Foundry VTT
+ */
+
+/* ========================================
+   IMPORTACAO DE FONTES GOOGLE
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ========================================
+   VARIAVEIS CSS - TEMA DIGIMON TECHNO
+   ======================================== */
+:root {
+    /* Cores principais */
+    --digi-primary: #00d4ff;
+    --digi-primary-dark: #0099cc;
+    --digi-secondary: #ff6b35;
+    --digi-accent: #7b2cbf;
+    --digi-success: #00ff88;
+    --digi-warning: #ffcc00;
+    --digi-danger: #ff3366;
+    
+    /* Backgrounds */
+    --digi-bg-dark: #0a0e17;
+    --digi-bg-medium: #121a2d;
+    --digi-bg-light: #1a2744;
+    --digi-bg-card: rgba(26, 39, 68, 0.85);
+    
+    /* Texto */
+    --digi-text-primary: #e8f4f8;
+    --digi-text-secondary: #8ba3b8;
+    --digi-text-muted: #5a7089;
+    
+    /* Bordas e efeitos */
+    --digi-border: rgba(0, 212, 255, 0.3);
+    --digi-border-glow: rgba(0, 212, 255, 0.6);
+    --digi-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    --digi-glow: 0 0 10px rgba(0, 212, 255, 0.5);
+    
+    /* Fontes */
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* ========================================
+   ESTILOS BASE DA FICHA DE TAMER
+   ======================================== */
+.custom-system-actor.digidices-tamer,
+.custom-system-entity.digidices-tamer {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--digi-bg-dark) 0%, var(--digi-bg-medium) 50%, var(--digi-bg-dark) 100%);
+    color: var(--digi-text-primary);
+    border: 2px solid var(--digi-border);
+    border-radius: 8px;
+    box-shadow: var(--digi-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de grid techno no fundo */
+.custom-system-actor.digidices-tamer::before,
+.custom-system-entity.digidices-tamer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.custom-system-actor.digidices-tamer > *,
+.custom-system-entity.digidices-tamer > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   CABECALHO DA FICHA
+   ======================================== */
+.digidices-tamer .sheet-header {
+    background: linear-gradient(180deg, var(--digi-bg-light) 0%, transparent 100%);
+    border-bottom: 2px solid var(--digi-border);
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Imagem do personagem */
+.digidices-tamer .profile-img-container {
+    border: 3px solid var(--digi-primary);
+    border-radius: 8px;
+    box-shadow: var(--digi-glow), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background: var(--digi-bg-dark);
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .profile-img-container:hover {
+    border-color: var(--digi-secondary);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: scale(1.02);
+}
+
+.digidices-tamer .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nome do personagem */
+.digidices-tamer .charname {
+    margin: 0;
+}
+
+.digidices-tamer .charname input {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--digi-border);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .charname input:focus {
+    border-color: var(--digi-primary);
+    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+    outline: none;
+}
+
+.digidices-tamer .charname input::placeholder {
+    color: var(--digi-text-muted);
+    text-transform: none;
+}
+
+/* ========================================
+   SISTEMA DE ABAS
+   ======================================== */
+.digidices-tamer nav.custom-tabs,
+.digidices-tamer .tabs {
+    background: var(--digi-bg-light);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    margin: 10px 15px;
+    padding: 8px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.digidices-tamer nav.custom-tabs a,
+.digidices-tamer .tabs a {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.digidices-tamer nav.custom-tabs a:hover,
+.digidices-tamer .tabs a:hover {
+    color: var(--digi-primary);
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--digi-border);
+}
+
+.digidices-tamer nav.custom-tabs a.active,
+.digidices-tamer .tabs a.active {
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border-color: var(--digi-primary);
+    box-shadow: var(--digi-glow);
+    text-shadow: none;
+}
+
+/* ========================================
+   PAINEIS E SECOES
+   ======================================== */
+.digidices-tamer .custom-system-panel {
+    background: var(--digi-bg-card);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.digidices-tamer .custom-system-panel-title,
+.digidices-tamer .section-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--digi-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.digidices-tamer .custom-system-panel-title::before,
+.digidices-tamer .section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--digi-primary);
+    border-radius: 2px;
+    box-shadow: var(--digi-glow);
+}
+
+/* ========================================
+   CAMPOS DE ENTRADA
+   ======================================== */
+.digidices-tamer input[type="text"],
+.digidices-tamer input[type="number"],
+.digidices-tamer select,
+.digidices-tamer textarea {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--digi-text-primary);
+    background: var(--digi-bg-dark);
+    border: 1px solid var(--digi-border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer input[type="text"]:focus,
+.digidices-tamer input[type="number"]:focus,
+.digidices-tamer select:focus,
+.digidices-tamer textarea:focus {
+    border-color: var(--digi-primary);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    outline: none;
+}
+
+.digidices-tamer input[type="number"] {
+    font-family: var(--font-mono);
+    text-align: center;
+}
+
+/* ========================================
+   LABELS E TEXTOS
+   ======================================== */
+.digidices-tamer label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.digidices-tamer .custom-system-label {
+    color: var(--digi-text-primary);
+}
+
+.digidices-tamer .custom-system-label-title {
+    font-family: var(--font-display);
+    color: var(--digi-secondary);
+}
+
+/* ========================================
+   ATRIBUTOS - ESTILO HEXAGONAL/TECH
+   ======================================== */
+.digidices-tamer .atributo-box {
+    background: linear-gradient(135deg, var(--digi-bg-light) 0%, var(--digi-bg-dark) 100%);
+    border: 2px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 15px 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.digidices-tamer .atributo-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--digi-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.digidices-tamer .atributo-box:hover {
+    border-color: var(--digi-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--digi-shadow);
+}
+
+.digidices-tamer .atributo-box:hover::before {
+    opacity: 1;
+}
+
+.digidices-tamer .atributo-nome {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--digi-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.digidices-tamer .atributo-valor {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    text-shadow: var(--digi-glow);
+}
+
+.digidices-tamer .atributo-valor input {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--digi-primary);
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 60px;
+}
+
+/* ========================================
+   PERICIAS - LISTA TECH
+   ======================================== */
+.digidices-tamer .pericia-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin: 4px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer .pericia-row:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--digi-border);
+}
+
+.digidices-tamer .pericia-nome {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--digi-text-primary);
+    flex: 1;
+}
+
+.digidices-tamer .pericia-valor {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--digi-primary);
+    min-width: 40px;
+    text-align: center;
+}
+
+.digidices-tamer .pericia-categoria {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 15px 0 8px 0;
+    padding: 5px 10px;
+    background: rgba(255, 107, 53, 0.1);
+    border-left: 3px solid var(--digi-secondary);
+}
+
+/* ========================================
+   RECURSOS - CARDS TECH
+   ======================================== */
+.digidices-tamer .recurso-card {
+    background: linear-gradient(135deg, var(--digi-bg-light) 0%, var(--digi-bg-medium) 100%);
+    border: 1px solid var(--digi-border);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.digidices-tamer .recurso-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--digi-primary), transparent);
+}
+
+.digidices-tamer .recurso-nome {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--digi-primary);
+    margin-bottom: 10px;
+}
+
+.digidices-tamer .recurso-descricao {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--digi-text-secondary);
+    line-height: 1.5;
+}
+
+.digidices-tamer .recurso-roll-btn {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.digidices-tamer .recurso-roll-btn:hover {
+    background: linear-gradient(135deg, var(--digi-secondary) 0%, #cc5529 100%);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+    transform: scale(1.02);
+}
+
+/* ========================================
+   BARRAS DE RECURSO (PV, DIGI-AURA)
+   ======================================== */
+.digidices-tamer .barra-recurso {
+    margin: 15px 0;
+}
+
+.digidices-tamer .barra-recurso-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.digidices-tamer .barra-recurso-label i {
+    color: var(--digi-primary);
+}
+
+.digidices-tamer .barra-container {
+    background: var(--digi-bg-dark);
+    border: 1px solid var(--digi-border);
+    border-radius: 20px;
+    height: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.digidices-tamer .barra-fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.digidices-tamer .barra-fill.pv {
+    background: linear-gradient(90deg, var(--digi-danger) 0%, #ff6688 100%);
+    box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.digidices-tamer .barra-fill.digi-aura {
+    background: linear-gradient(90deg, var(--digi-accent) 0%, #9d4edd 100%);
+    box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.digidices-tamer .barra-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--digi-text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   INVENTARIO - TABELA TECH
+   ======================================== */
+.digidices-tamer table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+.digidices-tamer thead th {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+    background: var(--digi-bg-dark);
+    border-bottom: 2px solid var(--digi-border);
+}
+
+.digidices-tamer tbody tr {
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.digidices-tamer tbody tr:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.digidices-tamer tbody td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+/* ========================================
+   BOTOES DE ACAO
+   ======================================== */
+.digidices-tamer .btn-acao {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--digi-text-primary);
+    background: transparent;
+    border: 1px solid var(--digi-border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .btn-acao:hover {
+    color: var(--digi-bg-dark);
+    background: var(--digi-primary);
+    border-color: var(--digi-primary);
+    box-shadow: var(--digi-glow);
+}
+
+.digidices-tamer .btn-acao.primary {
+    color: var(--digi-bg-dark);
+    background: linear-gradient(135deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+    border-color: var(--digi-primary);
+}
+
+.digidices-tamer .btn-acao.danger {
+    border-color: var(--digi-danger);
+}
+
+.digidices-tamer .btn-acao.danger:hover {
+    background: var(--digi-danger);
+    border-color: var(--digi-danger);
+}
+
+/* ========================================
+   ICONES DIGIVICE
+   ======================================== */
+.digidices-tamer .digivice-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--digi-bg-dark);
+    border: 1px solid var(--digi-primary);
+    border-radius: 4px;
+    color: var(--digi-primary);
+    font-size: 12px;
+}
+
+/* ========================================
+   BRASAO - ESTILO ESPECIAL
+   ======================================== */
+.digidices-tamer .brasao-container {
+    text-align: center;
+    padding: 15px;
+}
+
+.digidices-tamer .brasao-icon {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--digi-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    background: radial-gradient(circle, var(--digi-bg-light) 0%, var(--digi-bg-dark) 100%);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+    transition: all 0.3s ease;
+}
+
+.digidices-tamer .brasao-icon:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+}
+
+.digidices-tamer .brasao-nome {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--digi-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ========================================
+   ARQUETIPO
+   ======================================== */
+.digidices-tamer .arquetipo-box {
+    background: linear-gradient(135deg, rgba(123, 44, 191, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border: 1px solid var(--digi-accent);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.digidices-tamer .arquetipo-nome {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--digi-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.digidices-tamer .arquetipo-habilidade {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--digi-accent);
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.digidices-tamer .arquetipo-habilidade-nome {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--digi-primary);
+    margin-bottom: 5px;
+}
+
+/* ========================================
+   METER / BARRA DE PROGRESSO CSB
+   ======================================== */
+.digidices-tamer .custom-system-meter {
+    background: var(--digi-bg-dark);
+    border: 1px solid var(--digi-border);
+    border-radius: 20px;
+}
+
+.digidices-tamer .custom-system-meter-fill {
+    background: linear-gradient(90deg, var(--digi-primary) 0%, var(--digi-primary-dark) 100%);
+}
+
+.digidices-tamer .custom-system-meter-content {
+    font-family: var(--font-mono);
+    color: var(--digi-text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   ANIMACOES
+   ======================================== */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+}
+
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.digidices-tamer .pulse-effect {
+    animation: pulse-glow 2s infinite;
+}
+
+/* ========================================
+   ROLLABLE (ELEMENTOS CLICAVEIS)
+   ======================================== */
+.digidices-tamer .custom-system-rollable,
+.digidices-tamer .custom-system-rollable > * {
+    color: var(--digi-secondary);
+    cursor: pointer;
+}
+
+.digidices-tamer .custom-system-rollable:hover,
+.digidices-tamer .custom-system-rollable:hover > * {
+    color: var(--digi-primary);
+    text-shadow: var(--digi-glow);
+}
+
+/* ========================================
+   SCROLLBAR CUSTOMIZADA
+   ======================================== */
+.digidices-tamer ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.digidices-tamer ::-webkit-scrollbar-track {
+    background: var(--digi-bg-dark);
+    border-radius: 4px;
+}
+
+.digidices-tamer ::-webkit-scrollbar-thumb {
+    background: var(--digi-border);
+    border-radius: 4px;
+}
+
+.digidices-tamer ::-webkit-scrollbar-thumb:hover {
+    background: var(--digi-primary);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media (max-width: 600px) {
+    .digidices-tamer .sheet-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .digidices-tamer nav.custom-tabs a,
+    .digidices-tamer .tabs a {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+}
+
+/* ========================================
+   CHECKBOX CUSTOMIZADO
+   ======================================== */
+.digidices-tamer input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--digi-bg-dark);
+    border: 2px solid var(--digi-border);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.digidices-tamer input[type="checkbox"]:checked {
+    background: var(--digi-primary);
+    border-color: var(--digi-primary);
+}
+
+.digidices-tamer input[type="checkbox"]:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--digi-bg-dark);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ========================================
+   DYNAMIC TABLE - ESTILO DIGIDICES
+   ======================================== */
+.digidices-tamer .custom-system-dynamic-table-row-icons a {
+    color: var(--digi-text-secondary);
+    transition: color 0.2s ease;
+}
+
+.digidices-tamer .custom-system-dynamic-table-row-icons a:hover {
+    color: var(--digi-primary);
+}
+
+/* ========================================
+   ESTATISTICAS SECUNDARIAS
+   ======================================== */
+.digidices-tamer .stat-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--digi-border);
+    border-radius: 6px;
+    margin: 5px 0;
+}
+
+.digidices-tamer .stat-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--digi-text-secondary);
+    text-transform: uppercase;
+}
+
+.digidices-tamer .stat-value {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--digi-primary);
+}
+
+/* ========================================
+   EFEITOS ESPECIAIS PARA DIGIVICE
+   ======================================== */
+.digidices-tamer .digivice-display {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid var(--digi-primary);
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.digidices-tamer .digivice-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(0, 212, 255, 0.03) 50%,
+        transparent 55%
+    );
+    animation: scan-line 3s linear infinite;
+}
+
+/* ========================================
+   NUMERO DE NIVEL COM ESTILO
+   ======================================== */
+.digidices-tamer .nivel-display {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--digi-secondary) 0%, #cc5529 100%);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+}
